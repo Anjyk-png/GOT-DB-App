@@ -1,0 +1,96 @@
+@keyframes ldio {
+  0% {
+    transform: translate(16.61px, 67.95px) scale(0);
+  }
+  25% {
+    transform: translate(16.61px, 67.95px) scale(0);
+  }
+  50% {
+    transform: translate(16.61px, 67.95px) scale(1);
+  }
+  75% {
+    transform: translate(67.95px, 67.95px) scale(1);
+  }
+  100% {
+    transform: translate(119.29px, 67.95px) scale(1);
+  }
+}
+@keyframes ldio-5 {
+  0% {
+    transform: translate(119.29px, 67.95px) scale(1);
+  }
+  100% {
+    transform: translate(119.29px, 67.95px) scale(0);
+  }
+}
+@keyframes ldio-5 {
+  0% {
+    background: #2fce0c;
+  }
+  25% {
+    background: #f20000;
+  }
+  50% {
+    background: #726659;
+  }
+  75% {
+    background: #2b1bdf;
+  }
+  100% {
+    background: #2fce0c;
+  }
+}
+.ldio div {
+  position: absolute;
+  width: 15.1px;
+  height: 15.1px;
+  border-radius: 50%;
+  transform: translate(67.95px, 67.95px) scale(1);
+  background: #2fce0c;
+  animation: ldio-5kb2empswf4 1.7543859649122806s infinite
+    cubic-bezier(0, 0.5, 0.5, 1);
+}
+.ldio div:nth-child(1) {
+  background: #2b1bdf;
+  transform: translate(119.29px, 67.95px) scale(1);
+  animation: ldio-5kb2empswf4-r 0.43859649122807015s infinite
+      cubic-bezier(0, 0.5, 0.5, 1),
+    ldio-5kb2empswf4-c 1.7543859649122806s infinite step-start;
+}
+.ldio div:nth-child(2) {
+  animation-delay: -0.43859649122807015s;
+  background: #2fce0c;
+}
+.ldio div:nth-child(3) {
+  animation-delay: -0.8771929824561403s;
+  background: hsl(245, 78%, 49%);
+}
+.ldio div:nth-child(4) {
+  animation-delay: -1.3157894736842104s;
+  background: #726659;
+}
+.ldio div:nth-child(5) {
+  animation-delay: -1.7543859649122806s;
+  background: #f20000;
+}
+.loading {
+  width: 151px;
+  height: 151px;
+  display: flex;
+  overflow: hidden;
+  background: #332c2c;
+  margin: 0 auto;
+  align-items: center;
+}
+.ldio {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.ldio div {
+  box-sizing: content-box;
+}

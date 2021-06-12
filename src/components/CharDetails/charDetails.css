@@ -1,0 +1,112 @@
+.char-details {
+  background-color: #fff;
+  padding: 25px 25px 15px 25px;
+  margin-bottom: 40px;
+}
+
+.char-details h4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.select-error {
+  color: #fff;
+  text-align: center;
+  font-size: 26px;
+}
+
+@keyframes ldio-5kb2empswf4 {
+  0% {
+    transform: translate(16.61px, 67.95px) scale(0);
+  }
+  25% {
+    transform: translate(16.61px, 67.95px) scale(0);
+  }
+  50% {
+    transform: translate(16.61px, 67.95px) scale(1);
+  }
+  75% {
+    transform: translate(67.95px, 67.95px) scale(1);
+  }
+  100% {
+    transform: translate(119.29px, 67.95px) scale(1);
+  }
+}
+@keyframes ldio-5kb2empswf4-r {
+  0% {
+    transform: translate(119.29px, 67.95px) scale(1);
+  }
+  100% {
+    transform: translate(119.29px, 67.95px) scale(0);
+  }
+}
+@keyframes ldio-5kb2empswf4-c {
+  0% {
+    background: #2fce0c;
+  }
+  25% {
+    background: #f20000;
+  }
+  50% {
+    background: #726659;
+  }
+  75% {
+    background: #2b1bdf;
+  }
+  100% {
+    background: #2fce0c;
+  }
+}
+.ldio-5kb2empswf4 div {
+  position: absolute;
+  width: 15.1px;
+  height: 15.1px;
+  border-radius: 50%;
+  transform: translate(67.95px, 67.95px) scale(1);
+  background: #2fce0c;
+  animation: ldio-5kb2empswf4 1.7543859649122806s infinite
+    cubic-bezier(0, 0.5, 0.5, 1);
+}
+.ldio-5kb2empswf4 div:nth-child(1) {
+  background: #2b1bdf;
+  transform: translate(119.29px, 67.95px) scale(1);
+  animation: ldio-5kb2empswf4-r 0.43859649122807015s infinite
+      cubic-bezier(0, 0.5, 0.5, 1),
+    ldio-5kb2empswf4-c 1.7543859649122806s infinite step-start;
+}
+.ldio-5kb2empswf4 div:nth-child(2) {
+  animation-delay: -0.43859649122807015s;
+  background: #2fce0c;
+}
+.ldio-5kb2empswf4 div:nth-child(3) {
+  animation-delay: -0.8771929824561403s;
+  background: #2b1bdf;
+}
+.ldio-5kb2empswf4 div:nth-child(4) {
+  animation-delay: -1.3157894736842104s;
+  background: #da770e;
+}
+.ldio-5kb2empswf4 div:nth-child(5) {
+  animation-delay: -1.7543859649122806s;
+  background: #f20000;
+}
+.loadingio-spinner-ellipsis-bmjj91aji4b {
+  width: 151px;
+  height: 151px;
+  display: flex;
+  overflow: hidden;
+  background: white;
+  margin: 0 auto;
+  align-items: center;
+}
+.ldio-5kb2empswf4 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+.ldio-5kb2empswf4 div {
+  box-sizing: content-box;
+}
