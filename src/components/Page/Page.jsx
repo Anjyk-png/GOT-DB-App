@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 import styled from "styled-components";
 
@@ -7,101 +7,69 @@ import "../ItemList/itemList.css";
 import ItemList from "../ItemList";
 import CharDetails from "../CharDetails";
 
-const HONE = styled.h1`
+const Recomendation = styled.h1`
   color: #9a04ff;
   margin-top: 50px;
   margin-left: 150px;
 `;
-const Err = styled.div`
-  display: flex;
-  justify-content: center;
-  background: red;
-  border-radius: 5px;
-  border: 1px solid white;
-`;
 
-export default class Page extends React.Component {
-  state = {
-    char: [],
-    loading: true,
-    selected: null,
-    error: false,
-  };
+const Page = ({ getData, inf, num, getItem }) => {
+  const [char, setChar] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState(null);
 
-  componentDidMount() {
-    this.builList();
-  }
+  useEffect(() => {
+    buildList();
+  });
 
-  builList() {
-    const { getData } = this.props;
+  function buildList() {
     getData().then((data) => {
-      this.setState(() => ({
-        char: data,
-        loading: false,
-      }));
+      setChar(data);
+      setLoading(false);
     });
   }
 
-  onSelected = (id) => {
-    this.setState(() => ({ selected: id }));
+  const onSelected = (id) => {
+    setSelected(id);
   };
 
-  componentDidCatch() {
-    this.setState(() => ({
-      error: true,
-    }));
-  }
-
-  render() {
-    if (this.state.error) {
-      return (
-        <Err>
-          <h2>Something goes wrong.... =(</h2>
-        </Err>
-      );
-    }
-
-    const itemL = this.state.char.map((char, i) => (
-      <>
-        <ItemList
-          key={i}
-          id={i}
-          char={char.name}
-          gender={char.gender}
-          onSelected={this.onSelected}
-        />
-      </>
-    ));
-    const itemLisT = (
-      <>
-        <div className="loading">
-          <div className="ldio">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+  const itemL = char.map((char, i) => (
+    <>
+      <ItemList
+        key={i}
+        id={i}
+        char={char.name}
+        gender={char.gender}
+        onSelected={onSelected}
+      />
+    </>
+  ));
+  const itemLisT = (
+    <>
+      <div className="loading">
+        <div className="ldio">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-      </>
+      </div>
+    </>
+  );
+  const charDet =
+    selected || selected === 0 ? (
+      <CharDetails inf={inf} num={num} getItem={getItem} id={selected} />
+    ) : (
+      <Recomendation>Select something</Recomendation>
     );
-    const charDet =
-      this.state.selected || this.state.selected === 0 ? (
-        <CharDetails
-          inf={this.props.inf}
-          num={this.props.num}
-          getItem={this.props.getItem}
-          id={this.state.selected}
-        />
-      ) : (
-        <HONE>Select something</HONE>
-      );
 
-    return (
-      <Row>
-        <Col md="6">{this.state.loading ? itemLisT : itemL}</Col>
-        <Col md="6">{charDet}</Col>
-      </Row>
-    );
-  }
-}
+  return (
+    <Row>
+      <Col md="6">{loading ? itemLisT : itemL}</Col>
+      <Col md="6">{charDet}</Col>
+    </Row>
+  );
+};
+
+export default Page;
