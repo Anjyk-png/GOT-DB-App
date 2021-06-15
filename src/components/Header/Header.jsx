@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -36,20 +36,55 @@ const HeaderLinks = styled.ul`
 `;
 
 const Header = () => {
+  const [activeLi, setActiveLi] = useState("");
   return (
     <HeaderBlock>
-      <HeaderTitle>
-        <Link to="/">Game of Thrones DB</Link>
+      <HeaderTitle
+        style={
+          activeLi === ""
+            ? { color: "rgb(0, 255, 242)", fontSize: 30 }
+            : { color: "black" }
+        }
+        onClick={() => setActiveLi("")}
+      >
+        <Link to="/">Main</Link>
       </HeaderTitle>
       <HeaderLinks>
-        <li>
-          <Link to="/characters/">Characters</Link>
+        <li onClick={() => setActiveLi("char")}>
+          <Link
+            style={
+              activeLi === "char"
+                ? { color: "rgb(0, 255, 242)", fontSize: 25 }
+                : { color: "black" }
+            }
+            to="/characters/"
+          >
+            Characters
+          </Link>
         </li>
-        <li>
-          <Link to="/houses/">Houses</Link>
+        <li onClick={() => setActiveLi("hous")}>
+          <Link
+            style={
+              activeLi === "hous"
+                ? { color: "rgb(0, 255, 242)", fontSize: 25 }
+                : { color: "black" }
+            }
+            to="/houses/"
+          >
+            Houses
+          </Link>
         </li>
-        <li>
-          <Link to="/books/">Books</Link>
+        <li onClick={() => setActiveLi("book")}>
+          <Link
+            style={
+              activeLi === "book"
+                ? { color: "rgb(0, 255, 242)", fontSize: 25 }
+                : { color: "black" }
+            }
+            to="/books/"
+          >
+            Books
+          </Link>
         </li>
       </HeaderLinks>
     </HeaderBlock>
