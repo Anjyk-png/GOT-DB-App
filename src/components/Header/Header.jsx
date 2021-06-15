@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -13,10 +13,6 @@ const HeaderTitle = styled.h3`
   font-size: 24px;
   color: black;
   margin: 0;
-
-  a:hover {
-    color: rgb(0, 255, 242);
-  }
 `;
 
 const HeaderLinks = styled.ul`
@@ -30,22 +26,20 @@ const HeaderLinks = styled.ul`
     margin-right: 20px;
     font-size: 18px;
   }
-  a:hover {
-    color: rgb(0, 255, 242);
-  }
 `;
 
 const Header = () => {
-  const [activeLi, setActiveLi] = useState("");
+  const [, setActiveLi] = useState(" ");
+  console.log(window.location.href);
   return (
     <HeaderBlock>
       <HeaderTitle
         style={
-          activeLi === ""
+          window.location.href === "http://localhost:3000/"
             ? { color: "rgb(0, 255, 242)", fontSize: 30 }
             : { color: "black" }
         }
-        onClick={() => setActiveLi("")}
+        onClick={() => setActiveLi()}
       >
         <Link to="/">Main</Link>
       </HeaderTitle>
@@ -53,7 +47,7 @@ const Header = () => {
         <li onClick={() => setActiveLi("char")}>
           <Link
             style={
-              activeLi === "char"
+              window.location.href === "http://localhost:3000/characters/"
                 ? { color: "rgb(0, 255, 242)", fontSize: 25 }
                 : { color: "black" }
             }
@@ -65,7 +59,7 @@ const Header = () => {
         <li onClick={() => setActiveLi("hous")}>
           <Link
             style={
-              activeLi === "hous"
+              window.location.href === "http://localhost:3000/houses/"
                 ? { color: "rgb(0, 255, 242)", fontSize: 25 }
                 : { color: "black" }
             }
@@ -77,7 +71,7 @@ const Header = () => {
         <li onClick={() => setActiveLi("book")}>
           <Link
             style={
-              activeLi === "book"
+              window.location.href === "http://localhost:3000/books/"
                 ? { color: "rgb(0, 255, 242)", fontSize: 25 }
                 : { color: "black" }
             }
@@ -91,4 +85,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
