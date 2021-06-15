@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import "./itemList.css";
+import "./item.css";
 
 const Links = styled.div`
   li:hover {
@@ -9,11 +9,11 @@ const Links = styled.div`
   }
 `;
 
-const ItemList = ({ onSelected, id, char }) => {
+const Item = ({ onSelected, id, char }) => {
   return (
     <ul className="item-list list-group">
       <Links>
-        <li onClick={() => onSelected(id)} key={id} className="list-group-item">
+        <li onClick={() => onSelected(id)} className="list-group-item">
           {char}
         </li>
       </Links>
@@ -21,4 +21,4 @@ const ItemList = ({ onSelected, id, char }) => {
   );
 };
 
-export default ItemList;
+export default Item;

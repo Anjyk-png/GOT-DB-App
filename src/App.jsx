@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Col, Row, Container } from "reactstrap";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 import service from "./services/gotService";
 import "./loader.css";
-import "./components/ItemList/itemList.css";
+import "./components/Item/item.css";
 import Header from "./components/Header";
 import RandomChar from "./components/RandomChar";
 import Page from "./components/Page";
@@ -15,23 +17,6 @@ const Body = styled.div`
   height: 1100px;
 `;
 
-const Btn = styled.button`
-  width: 200px;
-  height: 40px;
-  margin-bottom: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  color: black;
-  font-size: 18px;
-  background-color: #9a04ff;
-  transition: 0.3s;
-  :hover {
-    background-color: rgb(0, 255, 242);
-    color: black;
-  }
-`;
 const CharacterPage = () => {
   const mainService = new service();
 
@@ -70,8 +55,17 @@ const HousePage = () => {
   );
 };
 
+const useStyles = makeStyles({
+  button: {
+    marginLeft: 180,
+    marginBottom: 18,
+    color: "black",
+  },
+});
+
 const App = () => {
   const [btnState, setBtnState] = useState(true);
+  const classes = useStyles();
 
   const clickButton = () => {
     setBtnState(!btnState);
@@ -89,7 +83,14 @@ const App = () => {
           <Row>
             <Col lg={{ size: 5, offset: 0 }}>
               {char}
-              <Btn onClick={clickButton}>Toggle random char</Btn>
+              <Button
+                className={classes.button}
+                onClick={clickButton}
+                variant="contained"
+                color="primary"
+              >
+                Toggle
+              </Button>
             </Col>
           </Row>
           <Route

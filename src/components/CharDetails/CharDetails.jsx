@@ -5,10 +5,6 @@ import "./charDetails.css";
 const CharDetails = ({ id, getItem, num, inf }) => {
   const [charDet, setCharDet] = useState([]);
 
-  useEffect(() => {
-    updateCharDet();
-  }, [id]);
-
   const updateCharDet = () => {
     setCharDet([]);
     getItem(id + num).then((data) => {
@@ -16,15 +12,19 @@ const CharDetails = ({ id, getItem, num, inf }) => {
     });
   };
 
+  useEffect(() => {
+    updateCharDet();
+  }, [id]);
+
   let label1,
-      label2,
-      label3,
-      label4,
-      label5,
-      label1Inf,
-      label2Inf,
-      label3Inf,
-      label5Inf;
+    label2,
+    label3,
+    label4,
+    label5,
+    label1Inf,
+    label2Inf,
+    label3Inf,
+    label5Inf;
 
   if (inf === 2) {
     const { country, isbn, mediaType, name, numberOfPages } = charDet;

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { Col, Row } from "reactstrap";
 import styled from "styled-components";
 
 import "../../loader.css";
-import "../ItemList/itemList.css";
-import ItemList from "../ItemList";
+import "../Item/item.css";
+import Item from "../Item";
 import CharDetails from "../CharDetails";
 
 const Recomendation = styled.h1`
-  color: #9a04ff;
+  color: black;
   margin-top: 50px;
   margin-left: 150px;
+  font-family: Roboto;
 `;
 
 const Page = ({ getData, inf, num, getItem }) => {
@@ -18,33 +19,39 @@ const Page = ({ getData, inf, num, getItem }) => {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
 
-  useEffect(() => {
-    buildList();
-  });
+  const memBuildList = useCallback(
+    function buildList() {
+      getData().then((data) => {
+        setChar(data);
+        setLoading(false);
+      });
+    },
+    [getData]
+  );
 
-  function buildList() {
-    getData().then((data) => {
-      setChar(data);
-      setLoading(false);
-    });
-  }
+  useEffect(() => {
+    memBuildList();
+  }, [inf, memBuildList]);
 
   const onSelected = (id) => {
     setSelected(id);
   };
 
-  const itemL = char.map((char, i) => (
-    <>
-      <ItemList
-        key={i}
-        id={i}
-        char={char.name}
-        gender={char.gender}
-        onSelected={onSelected}
-      />
-    </>
-  ));
-  const itemLisT = (
+  const itemL = useMemo(() => {
+    const list = char.map((char, i) => (
+      <>
+        <Item
+          key={Math.floor(Math.random() * 1000000000000000)}
+          id={i}
+          char={char.name}
+          gender={char.gender}
+          onSelected={onSelected}
+        />
+      </>
+    ));
+    return list;
+  }, [char]);
+  const loadGif = (
     <>
       <div className="loading">
         <div className="ldio">
@@ -66,7 +73,7 @@ const Page = ({ getData, inf, num, getItem }) => {
 
   return (
     <Row>
-      <Col md="6">{loading ? itemLisT : itemL}</Col>
+      <Col md="6">{loading ? loadGif : itemL}</Col>
       <Col md="6">{charDet}</Col>
     </Row>
   );
