@@ -1,21 +1,21 @@
-import React, { useState, memo } from "react";
-import styled from "styled-components";
+import React, { useState, memo, FC } from "react";
+import styled, { StyledComponent } from "styled-components";
 import { Link } from "react-router-dom";
 
-const HeaderBlock = styled.div`
+const HeaderBlock: StyledComponent<"div", any, {}, never> = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
 `;
 
-const HeaderTitle = styled.h3`
+const HeaderTitle: StyledComponent<"h3", any, {}, never> = styled.h3`
   font-size: 24px;
   color: black;
   margin: 0;
 `;
 
-const HeaderLinks = styled.ul`
+const HeaderLinks: StyledComponent<"ul", any, {}, never> = styled.ul`
   display: flex;
   margin: 0;
   align-items: center;
@@ -28,9 +28,8 @@ const HeaderLinks = styled.ul`
   }
 `;
 
-const Header = () => {
-  const [, setActiveLi] = useState(" ");
-  console.log(window.location.href);
+const Header: FC = (): JSX.Element => {
+  const [, setActiveLi] = useState<string | undefined>();
   return (
     <HeaderBlock>
       <HeaderTitle
@@ -39,12 +38,12 @@ const Header = () => {
             ? { color: "rgb(0, 255, 242)", fontSize: 30 }
             : { color: "black" }
         }
-        onClick={() => setActiveLi()}
+        onClick={() => setActiveLi(undefined)}
       >
         <Link to="/">Main</Link>
       </HeaderTitle>
       <HeaderLinks>
-        <li onClick={() => setActiveLi("char")}>
+        <li onClick={() => setActiveLi("characters")}>
           <Link
             style={
               window.location.href === "http://localhost:3000/characters/"
@@ -56,7 +55,7 @@ const Header = () => {
             Characters
           </Link>
         </li>
-        <li onClick={() => setActiveLi("hous")}>
+        <li onClick={() => setActiveLi("houses")}>
           <Link
             style={
               window.location.href === "http://localhost:3000/houses/"
@@ -68,7 +67,7 @@ const Header = () => {
             Houses
           </Link>
         </li>
-        <li onClick={() => setActiveLi("book")}>
+        <li onClick={() => setActiveLi("books")}>
           <Link
             style={
               window.location.href === "http://localhost:3000/books/"

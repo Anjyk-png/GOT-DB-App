@@ -1,23 +1,32 @@
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, { useCallback, useEffect, useState, useMemo, FC } from "react";
 import { Col, Row } from "reactstrap";
-import styled from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 
 import "../../loader.css";
 import "../Item/item.css";
-import Item from "../Item";
-import CharDetails from "../CharDetails";
+import Item from "../Item/Item";
+import CharDetails from "../CharDetails/CharDetails";
 
-const Recomendation = styled.h1`
+const Recomendation: StyledComponent<"h1", any, {}, never> = styled.h1`
   color: black;
   margin-top: 50px;
   margin-left: 150px;
   font-family: Roboto;
 `;
 
-const Page = ({ getData, inf, num, getItem }) => {
-  const [char, setChar] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState(null);
+interface IPage {
+  getData: () => Promise<any>;
+  inf: number;
+  num: number;
+  getItem: (id: number) => Promise<any>;
+}
+
+type charType = any | never[];
+
+const Page: FC<IPage> = ({ getData, inf, num, getItem }): JSX.Element => {
+  const [char, setChar] = useState<charType>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [selected, setSelected] = useState<number | null>(null);
 
   const memBuildList = useCallback(
     function buildList() {
@@ -33,25 +42,24 @@ const Page = ({ getData, inf, num, getItem }) => {
     memBuildList();
   }, [inf, memBuildList]);
 
-  const onSelected = (id) => {
+  const onSelected = (id: number): void => {
     setSelected(id);
   };
 
-  const itemL = useMemo(() => {
-    const list = char.map((char, i) => (
+  const itemL: Array<JSX.Element> = useMemo(() => {
+    const list: Array<JSX.Element> = char.map((char: charType, i: number) => (
       <>
         <Item
           key={Math.floor(Math.random() * 1000000000000000)}
           id={i}
           char={char.name}
-          gender={char.gender}
           onSelected={onSelected}
         />
       </>
     ));
     return list;
   }, [char]);
-  const loadGif = (
+  const loadGif: JSX.Element = (
     <>
       <div className="loading">
         <div className="ldio">
@@ -64,7 +72,7 @@ const Page = ({ getData, inf, num, getItem }) => {
       </div>
     </>
   );
-  const charDet =
+  const charDet: JSX.Element =
     selected || selected === 0 ? (
       <CharDetails inf={inf} num={num} getItem={getItem} id={selected} />
     ) : (

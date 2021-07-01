@@ -1,13 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 
 import "./charDetails.css";
 
-const CharDetails = ({ id, getItem, num, inf }) => {
-  const [charDet, setCharDet] = useState([]);
+interface IBookDetails {
+  country: string;
+  isbn: string;
+  mediaType: string;
+  name: string;
+  numberOfPages: number;
+}
+
+interface ICharacterDetails {
+  [key: string]: string;
+}
+
+interface IHouseDetails {
+  [key: string]: string;
+}
+
+interface ICharDetailsProps {
+  id: number;
+  getItem: (id: number) => Promise<any>;
+  num: number;
+  inf: number;
+}
+
+type LabelType = string | null;
+
+type CharDetailsType =
+  | ICharacterDetails
+  | IBookDetails
+  | IHouseDetails
+  | never[];
+
+const CharDetails: FC<ICharDetailsProps> = ({ id, getItem, num, inf }): JSX.Element => {
+  const [charDet, setCharDet] = useState<CharDetailsType>([]);
 
   const updateCharDet = () => {
     setCharDet([]);
-    getItem(id + num).then((data) => {
+    getItem(id + num).then((data: CharDetailsType) => {
       setCharDet(data);
     });
   };
@@ -16,29 +47,18 @@ const CharDetails = ({ id, getItem, num, inf }) => {
     updateCharDet();
   }, [id]);
 
-  let label1,
-    label2,
-    label3,
-    label4,
-    label5,
-    label1Inf,
-    label2Inf,
-    label3Inf,
-    label5Inf;
+  let label1: LabelType = null,
+    label2: LabelType = null,
+    label3: LabelType = null,
+    label4: LabelType = null,
+    label5: LabelType | number = null,
+    label1Inf: LabelType = null,
+    label2Inf: LabelType = null,
+    label3Inf: LabelType = null,
+    label5Inf: LabelType = null;
 
-  if (inf === 2) {
-    const { country, isbn, mediaType, name, numberOfPages } = charDet;
-    label1 = country;
-    label2 = isbn;
-    label3 = mediaType;
-    label4 = name;
-    label5 = numberOfPages;
-    label1Inf = "Country";
-    label2Inf = "ISBN";
-    label3Inf = "MediaType";
-    label5Inf = "NumberOfPages";
-  } else if (inf === 1) {
-    const { name, culture, gender, born, died } = charDet;
+  if (inf === 1) {
+    const { name, culture, gender, born, died }: any = charDet;
     label1 = gender;
     label3 = died;
     label2 = born;
@@ -48,8 +68,19 @@ const CharDetails = ({ id, getItem, num, inf }) => {
     label2Inf = "Born";
     label3Inf = "Died";
     label5Inf = "Culture";
+  } else if (inf === 2) {
+    const { country, isbn, mediaType, name, numberOfPages }: any = charDet;
+    label1 = country;
+    label2 = isbn;
+    label3 = mediaType;
+    label4 = name;
+    label5 = numberOfPages;
+    label1Inf = "Country";
+    label2Inf = "ISBN";
+    label3Inf = "MediaType";
+    label5Inf = "NumberOfPages";
   } else if (inf === 3) {
-    const { name, region, founded } = charDet;
+    const { name, region, founded }: any = charDet;
     switch (id) {
       case 0:
         label3 = null;
@@ -92,7 +123,7 @@ const CharDetails = ({ id, getItem, num, inf }) => {
         label5 = "Petyr Baelish";
         break;
       default:
-        return;
+        return <></>;
     }
 
     label1 = region;

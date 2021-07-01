@@ -1,11 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 
 import "./randomChar.css";
 import "../CharDetails/charDetails.css";
 import GotService from "../../services/gotService";
 
-const RandomChar = () => {
-  const [charData, setCharData] = useState({
+interface ICharData {
+  born: string | null;
+  culture: string | null;
+  died: string | null;
+  father: string | null;
+  gender: string | null;
+  mother: string | null;
+  name: string | null;
+}
+
+const RandomChar: FC = (): JSX.Element => {
+  const [charData, setCharData] = useState<ICharData>({
     born: null,
     culture: null,
     died: null,
@@ -14,18 +24,18 @@ const RandomChar = () => {
     mother: null,
     name: null,
   });
-  const [loading, setLoading] = useState(true);
-  const service = new GotService();
+  const [loading, setLoading] = useState<boolean>(true);
+  const service: GotService = new GotService();
   useEffect(() => {
     changeState();
-    let timerId = setInterval(changeState, 4000);
+    let timerId: NodeJS.Timeout = setInterval(changeState, 4000);
     return () => {
       clearInterval(timerId);
     };
   }, []);
 
-  function changeState() {
-    const id = Math.floor(Math.random() * 140 + 25);
+  function changeState(): void {
+    const id: number = Math.floor(Math.random() * 140 + 25);
     service.getCharacter(id).then((data) => {
       setCharData({
         born: data.born ? data.born : "no data =)",

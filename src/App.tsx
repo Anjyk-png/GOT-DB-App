@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { Col, Row, Container } from "reactstrap";
-import styled from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,17 +8,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import service from "./services/gotService";
 import "./loader.css";
 import "./components/Item/item.css";
-import Header from "./components/Header";
-import RandomChar from "./components/RandomChar";
-import Page from "./components/Page";
+import Header from "./components/Header/Header";
+import RandomChar from "./components/RandomChar/RandomChar";
+import Page from "./components/Page/Page";
 
-const Body = styled.div`
+const Body: StyledComponent<"div", any, {}, never> = styled.div`
   background: #332c2c;
   height: 1100px;
 `;
 
-const CharacterPage = () => {
-  const mainService = new service();
+const CharacterPage: FC = (): JSX.Element => {
+  const mainService: service = new service();
 
   return (
     <Page
@@ -29,8 +29,8 @@ const CharacterPage = () => {
     />
   );
 };
-const BookPage = () => {
-  const mainService = new service();
+const BookPage: FC = (): JSX.Element => {
+  const mainService: service = new service();
 
   return (
     <Page
@@ -42,8 +42,8 @@ const BookPage = () => {
   );
 };
 
-const HousePage = () => {
-  const mainService = new service();
+const HousePage: FC = (): JSX.Element => {
+  const mainService: service = new service();
 
   return (
     <Page
@@ -63,15 +63,15 @@ const useStyles = makeStyles({
   },
 });
 
-const App = () => {
-  const [btnState, setBtnState] = useState(true);
+const App: FC = (): JSX.Element => {
+  const [btnState, setBtnState] = useState<boolean>(true);
   const classes = useStyles();
 
-  const clickButton = () => {
+  const clickButton = (): void => {
     setBtnState(!btnState);
   };
 
-  const char = btnState ? <RandomChar /> : null;
+  const char: JSX.Element | null = btnState ? <RandomChar /> : null;
 
   return (
     <Router>
